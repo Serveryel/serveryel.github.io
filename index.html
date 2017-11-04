@@ -1,33 +1,95 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width initial-scale=1.0">
 		<title>Cavernicola</title>
 		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	</head>
 	<body>
 		<nav>
-    		<ul>
-        		<li><a href="/c1">cosa1</a></li>
-	        	<li><a href="/c2">cosa2</a></li>
-        		<li><a href="/c3">cosa3</a></li>
-        		<li><a href="/c4">cosa4</a></li>
-    		</ul>
+    		
+        		Nuestras redes sociales
+	        	<a href="https://www.youtube.com/" target="_blank"><img title="Canal en You Tube" src="i/youtube.png" alt="You Tube" /></a>
+        		<a href="https://soundcloud.com/" target="_blank"><img title="Soundcloud" src="i/soundcloud.png" alt="Soundcloud" /></a>
+        		<a href="https://www.facebook.com/" target="_blank"><img title="Facebook" src="i/facebook.png" alt="Facebook" /></a>
+    		
 		</nav>
-		<img src="https://drive.google.com/uc?export=download&id=0B1YD-wi4sZHedmkyN2N4b3RxWVE"/>
-		<div class="container">
-			 <audio controls>
-  		<source src="/m/m.mp3" type="audio/mpeg">
+		<div>
+			<div>
+				<img id="cover" src="i/pegasus.jpg" width="25%"/>
+				<audio id="player" controls>
+			  		<source id="source" src="" type="audio/mpeg">
 
-		Your browser does not support the audio element.
-		</audio> 
-    		<div class="blurb">
-        		<h1>Hola, esto es una prueba.</h1>
-
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<small>&copy; Copyright <script>document.write(new Date().getFullYear())</script>, Discográfica cavernicola</small>
-		</footer>
+					Tu navegador no soporta este elemento de audio.
+				</audio>
+			 
+			</div>
+			<div>
+				<table>
+					
+					<tr class="playable" id="song1">	
+						<td><img id="img1" src="i/playmini.png"></td>
+						<td>Fantasticats</td>
+						<td>4:48</td>
+						<td id="link1" hidden>m/cats.mp3</td>
+						<td id="cover1" hidden>i/anio13.jpg</td>
+					</tr>
+					<tr class="playable" id="song2">	
+						<td><img id="img3" src="i/playmini.png"></td>
+						<td>Libelula lunar</td>
+						<td>4:12</td>
+						<td id="m/libelula.mp3" hidden>m/libelula.mp3</td>
+						<td id="cover2" hidden>i/mixelanea.jpg</td>
+					</tr>
+					<tr class="playable" id="song3">	
+						<td><img id="img3" src="i/playmini.png"></td>
+						<td>Fin</td>
+						<td>1:24</td>
+						<td id="link3" hidden>m/fin.mp3</td>
+						<td id="cover3" hidden>i/pegasus.jpg</td>
+					</tr>
+				</table> 
+			</div>
+		</div>
+    		
+		
 	</body>
+	<footer>
+    		<small>&copy; Copyright <script>document.write(new Date().getFullYear())</script>, Discográfica cavernicola</small>
+	</footer>
+
+	<script>
+		var player;
+		var cover;
+		document.body.onload=function(){
+			
+			var buttons = document.getElementsByClassName("playable");
+			player=document.getElementById("player");
+			cover=document.getElementById("cover");
+
+			for(var i = 0; i < buttons.length; i++) {
+
+   				buttons[i].addEventListener('click',
+				function(event){
+					play(event);
+				});
+			}
+		}
+		function play(event){
+			
+			
+			var song=document.getElementById(event.currentTarget.id);
+			var td=song.getElementsByTagName("td");
+			document.getElementById("source").src=td[3].innerText;
+			cover.src=td[4].innerText;
+			player.load();
+			player.play();
+			
+			
+			
+		}
+
+
+	</script>
 </html>
