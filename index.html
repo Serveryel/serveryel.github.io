@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width initial-scale=1.0">
+		<meta name="viewport" content="width=device-width initial-scale=1.0" charset="utf-8">
 		<title>Cavernicola</title>
 		<!-- link to main stylesheet -->
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -62,24 +62,52 @@
 	<script>
 		var player;
 		var cover;
+		var nSings;
+		var nSing;
+		var shadow;
 		document.body.onload=function(){
 			
 			var buttons = document.getElementsByClassName("playable");
 			player=document.getElementById("player");
 			cover=document.getElementById("cover");
+			nSings=document.getElementsByTagName("tr").length;
+			
 
 			for(var i = 0; i < buttons.length; i++) {
 
    				buttons[i].addEventListener('click',
 				function(event){
-					play(event);
+					play(document.getElementById(event.currentTarget.id));
 				});
 			}
+			document.getElementById("player").addEventListener('ended', function () {
+   				var n=nSing;
+				
+				if(n==nSings){
+					n=1;
+				}else{
+					n=n+1;
+				}
+				var id="song"+n.toString();
+   				play(document.getElementById(id));
+ 			}, false);
 		}
-		function play(event){
+		function play(song){
 			
 			
-			var song=document.getElementById(event.currentTarget.id);
+			
+			if(shadow!=null){
+				shadow.style.backgroundColor="white";
+				shadow.style.color="black";
+
+			}
+			var id=song.id;
+			nSing=parseInt(id.substr(id.length-1,1));
+			
+			shadow=song;
+			song.style.backgroundColor="#7a7a7a";
+			song.style.color="white";
+			
 			var td=song.getElementsByTagName("td");
 			document.getElementById("source").src=td[3].innerText;
 			cover.src=td[4].innerText;
@@ -89,6 +117,7 @@
 			
 			
 		}
+		
 
 
 	</script>
