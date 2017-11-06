@@ -74,7 +74,7 @@
 			var buttons = document.getElementsByClassName("playable");
 			player=document.getElementById("player");
 			cover=document.getElementById("cover");
-			nSings=document.getElementsByTagName("tr").length;
+			nSings=document.getElementsByClassName("playable").length;
 			
 
 			for(var i = 0; i < buttons.length; i++) {
@@ -86,13 +86,15 @@
 			}
 			document.getElementById("player").addEventListener('ended', function () {
    				var n=nSing;
-				
+				alert(nSing);
+				alert(nSings);
 				if(n==nSings){
 					n=1;
 				}else{
 					n=n+1;
 				}
 				var id="song"+n.toString();
+				alert(id);
    				play(document.getElementById(id));
  			}, false);
 		}
